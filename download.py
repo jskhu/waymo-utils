@@ -20,11 +20,12 @@ path = Path(args.out_dir)
 path.mkdir(parents=True, exist_ok=True)
 
 for seg_id in range(num_segs[args.split]):
-    filename = (url_template % seg_id).split('/')[-1]
+    url = url_template % seg_id
+    filename = url.split('/')[-1]
     print("Downloading " + filename)
     if (path/filename).is_file():
         print(filename + ' already downloaded. Skipping.')
         continue
 
-    flag = os.system('gsutil cp ' + filename + ' ' + args.out_dir)
+    flag = os.system('gsutil cp ' + url + ' ' + args.out_dir)
     assert flag == 0, 'Failed to download segment %d. Make sure gsutil is installed' % seg_id
