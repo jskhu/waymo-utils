@@ -5,9 +5,10 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('split', choices=['training', 'validation', 'testing', 'domain_adaptation'])
 parser.add_argument('--out-dir', default='./tmp')
+parser.add_argument('--tf_files', default='missing_tfs.txt')
 args = parser.parse_args()
 
-url_template = 'gs://waymo_open_dataset_v_1_2_0/{split}/{split}_%04d.tar'.format(split=args.split)
+url_template = 'gs://waymo_open_dataset_v_1_4_0/archived_files/{split}/{split}_%04d.tar'.format(split=args.split)
 num_segs = {
     'training': 32,
     'validation': 8,
